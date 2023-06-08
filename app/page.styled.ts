@@ -2,13 +2,23 @@ import styled from 'styled-components';
 
 export const StyledMain = styled.main`
 	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 20px;
 	background-color: ${({ theme }) => theme.color.gray[10]};
 	width: 50%;
 	min-width: 345px;
 	border-radius: 0.8rem;
-	padding: 2rem 1.5rem;
+	padding: 10px;
 	box-shadow: 0 0 0.5rem 0.05rem rgba(0, 0, 0, 0.1);
 	position: relative;
+	min-height: 400px;
+	height: 400px;
+	& > :nth-child(2) {
+		display: flex;
+		justify-content: space-between;
+		gap: 5px;
+	}
 `;
 
 export const StyledLogo = styled.div`

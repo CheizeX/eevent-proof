@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
 * {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	font-family: 'Poppins', sans-serif;
+	font-size: 0.875rem;
 }
 
 html,
@@ -16,5 +20,6 @@ body {
 	justify-content: center;
 	background-color: rgb(254, 242, 250);
 	min-height: 100vh;
-	box-shadow: inset 50px 150px 40px rgba(147, 118, 157, 0.32);
+	box-shadow: inset 1.125rem 2.375rem 2.5rem rgba(147, 118, 157, 0.32);
+	background-image: url('/images/image.png');
 }

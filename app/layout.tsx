@@ -3,8 +3,6 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { Providers } from './provider';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export default function RootLayout({
 	children,
 }: {
@@ -19,7 +17,7 @@ export default function RootLayout({
 				<link rel='icon' href='/favicon.ico' />
 			</head>
 			<Providers>
-				<body className={inter.className}>{children}</body>
+				<body>{children}</body>
 			</Providers>
 		</html>
 	);
