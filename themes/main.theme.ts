@@ -37,6 +37,7 @@ export const mainTheme: DefaultTheme = {
 			3: '#F8E6FF',
 			4: '#BC00CC77',
 			5: '#EEB4FF',
+			6: '#ED1E78',
 		},
 		turquoise: {
 			1: '#00b4d8',
