@@ -39,10 +39,13 @@ const Button = styled.button<ButtonProps>`
 		transition: 0.3s;
 		cursor: pointer;
 	}
-	&:disabled {
-		cursor: not-allowed;
-		opacity: 0.5;
-	}
+	${({ state }) =>
+		state === ButtonState.DISABLED &&
+		css`
+			cursor: not-allowed;
+			opacity: 0.5;
+			pointer-events: none;
+		`}
 
 	${({ variant }) =>
 		variant === ButtonVariant.OUTLINED &&

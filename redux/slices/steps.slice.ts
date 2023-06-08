@@ -3,13 +3,11 @@ import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 export type StepType = {
 	step: number;
 	title: string;
-	description: string;
 };
 
 const initialState: StepType = {
 	step: 1,
 	title: 'Step 1',
-	description: 'Please enter your email address',
 };
 
 const activeStepSlice: Slice<StepType> = createSlice({

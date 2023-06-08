@@ -1,8 +1,14 @@
 import { styled } from 'styled-components';
 
-export const StyledButtonsContainer = styled.div`
+export const StyledButtonsContainer = styled.div<{ activestep: number }>`
 	display: flex;
 	gap: 20px;
 	width: 100%;
-	background: ${({ theme }) => theme.color.gray[9]};
+	justify-content: space-between;
+
+	& > :nth-child(1) {
+		transition: opacity 0.3s ease-in-out;
+		opacity: ${({ activestep }) => (activestep === 1 ? 0 : 1)};
+		pointer-events: ${({ activestep }) => (activestep === 1 ? 'none' : 'all')};
+	}
 `;

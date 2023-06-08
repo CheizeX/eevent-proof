@@ -1,8 +1,17 @@
+// Controls.tsx
+import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { FormikProps } from 'formik';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setActiveStep } from '@/redux/slices/steps.slice';
-import { ButtonVariant, StyledButton } from '../shared/Button/Button';
+import {
+	ButtonState,
+	ButtonVariant,
+	StyledButton,
+} from '../shared/Button/Button';
 
 import * as S from './Controls.styled';
+
 enum StepOperationEnum {
 	INCREMENT = 'INCREMENT',
 	DECREMENT = 'DECREMENT',
@@ -31,28 +40,48 @@ const steps = [
 	},
 ];
 
-const Controls = () => {
+type Props = {
+	formik: FormikProps<any>;
+};
+
+const Controls: FC<Props> = ({ formik }) => {
 	const dispatch = useAppDispatch();
 	const activeStep = useAppSelector(state => state.activeStep);
 
 	const handleClick = (stepOperation: StepOperationEnum) => {
-		let newStep = activeStep.step;
-
-		if (stepOperation === StepOperationEnum.INCREMENT) {
-			newStep =
+		console.log('entra');
+		if (stepOperation === StepOperationEnum.INCREMENT && formik.isValid) {
+			let newStep =
 				activeStep.step < steps.length ? activeStep.step + 1 : activeStep.step;
+			const updatedStep = steps.find(step => step.step === newStep);
+			if (updatedStep) {
+				dispatch(setActiveStep(updatedStep));
+			}
 		} else if (stepOperation === StepOperationEnum.DECREMENT) {
-			newStep = activeStep.step > 1 ? activeStep.step - 1 : activeStep.step;
-		}
-
-		const updatedStep = steps.find(step => step.step === newStep);
-
-		if (updatedStep) {
-			dispatch(setActiveStep(updatedStep));
+			let newStep = activeStep.step > 1 ? activeStep.step - 1 : activeStep.step;
+			const updatedStep = steps.find(step => step.step === newStep);
+			if (updatedStep) {
+				dispatch(setActiveStep(updatedStep));
+			}
 		}
 	};
+	console.log(formik.isValid);
+	const handleDisabled = () => {
+		if (activeStep.step === 1) {
+			if (
+				formik.isValid &&
+				formik.values.fullName !== '' &&
+				formik.values.email !== '' &&
+				formik.values.phone !== ''
+			)
+				return ButtonState.ENABLED;
+			return ButtonState.DISABLED;
+		}
+		return ButtonState.DISABLED;
+	};
+	console.log(handleDisabled());
 	return (
-		<S.StyledButtonsContainer>
+		<S.StyledButtonsContainer activestep={activeStep.step}>
 			<StyledButton
 				text='Previous'
 				onClick={() => handleClick(StepOperationEnum.DECREMENT)}
@@ -62,6 +91,7 @@ const Controls = () => {
 				text='Next'
 				onClick={() => handleClick(StepOperationEnum.INCREMENT)}
 				variant={ButtonVariant.OUTLINED}
+				state={handleDisabled()}
 			/>
 		</S.StyledButtonsContainer>
 	);
