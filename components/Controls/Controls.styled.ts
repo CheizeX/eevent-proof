@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 export const StyledButtonsContainer = styled.div<{ activestep: number }>`
 	display: flex;
-	gap: 20px;
+	gap: 1.25rem;
 	width: 100%;
 	justify-content: space-between;
 

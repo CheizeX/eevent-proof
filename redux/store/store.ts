@@ -1,8 +1,16 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import activeStep from '../slices/steps.slice';
+import StepOneSlice from '../slices/stepOne.slice';
+import StepTwoSlice from '../slices/stepTwo.slice';
+import StepThreeSlice from '../slices/stepThree.slice';
+import StepFourSlice from '../slices/stepFour.slice';
 
 const rootReducer = combineReducers({
 	activeStep,
+	StepOneSlice,
+	StepTwoSlice,
+	StepThreeSlice,
+	StepFourSlice,
 });
 
 export const store = configureStore({

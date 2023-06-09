@@ -23,3 +23,15 @@ body {
 	box-shadow: inset 1.125rem 2.375rem 2.5rem rgba(147, 118, 157, 0.32);
 	background-image: url('/images/image.png');
 }
+
+button {
+	border: none;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}

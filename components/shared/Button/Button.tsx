@@ -22,11 +22,11 @@ type ButtonProps = {
 };
 
 const Button = styled.button<ButtonProps>`
-	width: ${({ width }) => width || '150px'};
-	height: ${({ height }) => height || '40px'};
-	font-size: 16px;
+	width: ${({ width }) => width || '9.375rem'};
+	height: ${({ height }) => height || '2.5rem'};
+	font-size: 1rem;
 	font-weight: bold;
-	border-radius: 27px;
+	border-radius: 1.6875rem;
 	cursor: pointer;
 	background-size: 100% auto;
 	background-image: linear-gradient(129.16deg, #ed1e78 0%, #ff9b9b 100%);
@@ -52,7 +52,7 @@ const Button = styled.button<ButtonProps>`
 		css`
 			background: none;
 			color: #ed1e78;
-			border: 2px solid #ed1e78;
+			border: 0.125rem solid #ed1e78;
 		`}
 `;
 
@@ -71,7 +71,7 @@ export const StyledButton: FC<ButtonProps> = ({
 			variant={variant}
 			width={width}
 			height={height}
-			onClick={onClick} // Corregido el typo en el nombre de la prop
+			onClick={onClick}
 		>
 			{text}
 		</Button>
