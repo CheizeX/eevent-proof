@@ -8,8 +8,14 @@ import Controls from '@/components/Controls/Controls';
 import { StyledLogo } from './page.styled';
 import FormsContainer from '@/components/FormsContainer/FormsContainer';
 import { FormValues } from '@/components/FormsContainer/FormOne/FormOne.types';
+import activeStepSlice from '../redux/slices/steps.slice';
+import { useAppSelector } from '@/redux/hooks';
+import Link from 'next/link';
 
 export default function Home() {
+	const { activeStep } = useAppSelector(state => state);
+
+	// FORMIK MANAGEMENT
 	const initialValues: FormValues = {
 		fullName: '',
 		email: '',
@@ -31,26 +37,26 @@ export default function Home() {
 			.matches(/^\+\d{1,3}\s\d{1,14}$/, 'Invalid phone number'),
 	});
 
-	const handleSubmit = (values: FormValues) => {
-		console.log(values);
-	};
-
 	const formik = useFormik({
 		initialValues,
 		validationSchema,
-		onSubmit: handleSubmit,
+		onSubmit: () => {},
 	});
 
 	return (
 		<S.StyledMain>
-			<StyledLogo>
-				Evvent. <span>form </span>{' '}
-			</StyledLogo>
+			<StyledLogo>3vvent.</StyledLogo>
 			<div>
 				<Steps />
 				<FormsContainer formik={formik} />
 			</div>
-			<Controls formik={formik} />
+			{activeStep.step <= 3 ? (
+				<Controls formik={formik} />
+			) : (
+				<Link href='/about'>
+					<S.StyledKnowAboutUs>Know more about US {'<'}</S.StyledKnowAboutUs>
+				</Link>
+			)}
 		</S.StyledMain>
 	);
 }

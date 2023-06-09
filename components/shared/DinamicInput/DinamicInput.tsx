@@ -12,20 +12,21 @@ const InputContainer = styled.div`
 
 const Label = styled.label`
 	display: block;
-	margin-bottom: 5px;
+	margin-bottom: 0.3125rem;
 	color: ${({ theme }) => theme.color.pink[3]};
 `;
 
 const Input = styled.input`
 	width: 100%;
-	min-height: 40px;
-	border-radius: 10px;
+	min-height: 2.5rem;
+	border-radius: 0.625rem;
 	border: none;
 	outline: none;
-	padding: 0 0.5rem;
+	padding: 0 1rem;
 	color: ${({ theme }) => theme.color.pink[6]};
 	&::placeholder {
 		color: ${({ theme }) => theme.color.gray[8]};
+		letter-spacing: 0.1rem;
 	}
 `;
 

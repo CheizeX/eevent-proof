@@ -1,9 +1,8 @@
 // Controls.tsx
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { FormikProps } from 'formik';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { setActiveStep } from '@/redux/slices/steps.slice';
+import { decrementStep, incrementStep } from '@/redux/slices/steps.slice';
 import {
 	ButtonState,
 	ButtonVariant,
@@ -11,6 +10,7 @@ import {
 } from '../shared/Button/Button';
 
 import * as S from './Controls.styled';
+import { StepOneType, setStepOne } from '@/redux/slices/stepOne.slice';
 
 enum StepOperationEnum {
 	INCREMENT = 'INCREMENT',
@@ -47,25 +47,28 @@ type Props = {
 const Controls: FC<Props> = ({ formik }) => {
 	const dispatch = useAppDispatch();
 	const activeStep = useAppSelector(state => state.activeStep);
+	const stepTwoSlice = useAppSelector(state => state.StepTwoSlice);
+	const stepThreeSlice = useAppSelector(state => state.StepThreeSlice);
+	const stepFourSlice = useAppSelector(state => state.StepFourSlice);
 
 	const handleClick = (stepOperation: StepOperationEnum) => {
-		console.log('entra');
-		if (stepOperation === StepOperationEnum.INCREMENT && formik.isValid) {
-			let newStep =
-				activeStep.step < steps.length ? activeStep.step + 1 : activeStep.step;
-			const updatedStep = steps.find(step => step.step === newStep);
-			if (updatedStep) {
-				dispatch(setActiveStep(updatedStep));
+		if (
+			stepOperation === StepOperationEnum.INCREMENT &&
+			activeStep.step < steps.length
+		) {
+			if (activeStep.step === 1) {
+				dispatch(setStepOne(formik.values as StepOneType));
 			}
-		} else if (stepOperation === StepOperationEnum.DECREMENT) {
-			let newStep = activeStep.step > 1 ? activeStep.step - 1 : activeStep.step;
-			const updatedStep = steps.find(step => step.step === newStep);
-			if (updatedStep) {
-				dispatch(setActiveStep(updatedStep));
-			}
+
+			dispatch(incrementStep(1));
+		} else if (
+			stepOperation === StepOperationEnum.DECREMENT &&
+			activeStep.step > 1
+		) {
+			dispatch(decrementStep(1));
 		}
 	};
-	console.log(formik.isValid);
+
 	const handleDisabled = () => {
 		if (activeStep.step === 1) {
 			if (
@@ -77,18 +80,27 @@ const Controls: FC<Props> = ({ formik }) => {
 				return ButtonState.ENABLED;
 			return ButtonState.DISABLED;
 		}
+		if (activeStep.step === 2 && stepTwoSlice.id !== 0) {
+			return ButtonState.ENABLED;
+		}
+		if (activeStep.step === 3 && stepThreeSlice.activeItems.length > 0) {
+			return ButtonState.ENABLED;
+		}
+		if (activeStep.step === 4 && stepFourSlice.id !== 0) {
+			return ButtonState.ENABLED;
+		}
 		return ButtonState.DISABLED;
 	};
-	console.log(handleDisabled());
+
 	return (
 		<S.StyledButtonsContainer activestep={activeStep.step}>
 			<StyledButton
-				text='Previous'
+				text='Back'
 				onClick={() => handleClick(StepOperationEnum.DECREMENT)}
 			/>
 
 			<StyledButton
-				text='Next'
+				text='Continue'
 				onClick={() => handleClick(StepOperationEnum.INCREMENT)}
 				variant={ButtonVariant.OUTLINED}
 				state={handleDisabled()}

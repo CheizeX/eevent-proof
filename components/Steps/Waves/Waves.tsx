@@ -21,16 +21,20 @@ const StyledWavesContainer = styled.div`
 	}
 	@keyframes move-forever {
 		0% {
-			transform: translate3d(-90px, 0, 0);
+			transform: translate3d(-5.625rem, 0, 0);
 		}
 		100% {
-			transform: translate3d(85px, 0, 0);
+			transform: translate3d(5.3125rem, 0, 0);
 		}
 	}
 
 	width: 100%;
-	height: 10px;
+	height: 0.625rem;
 	overflow: hidden;
+	@media (max-width: 40rem) {
+		transform: rotate(90deg);
+		width: 4.125rem;
+	}
 `;
 
 export const WavesSvg = function () {

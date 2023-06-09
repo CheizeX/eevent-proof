@@ -10,7 +10,6 @@ type Props = {
 };
 
 const FormOne: FC<Props> = ({ formik }) => {
-	console.log({ formik });
 	return (
 		<FormContainer>
 			<DynamicInput
@@ -35,7 +34,7 @@ const FormOne: FC<Props> = ({ formik }) => {
 
 			<DynamicInput
 				placeholder='+54 3415849048'
-				label='Phone'
+				label='Phone (with country code spaced with +)'
 				id='phone'
 				type='tel'
 				{...formik.getFieldProps('phone')}

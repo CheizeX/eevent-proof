@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type StepOneType = {
 	fullName: string;
@@ -12,15 +12,18 @@ const initialState: StepOneType = {
 	phone: '',
 };
 
-const StepOneSlice: Slice<StepOneType> = createSlice({
-	name: 'activeStep',
+const StepOneSlice = createSlice({
+	name: 'setStepOne',
 	initialState,
 	reducers: {
-		setStepOne: (state, action: PayloadAction<StepOneType>) => {
-			return action.payload;
+		setStepOne: (state: StepOneType, action: PayloadAction<StepOneType>) => {
+			return {
+				...state,
+				...action.payload,
+			};
 		},
 	},
 });
 
-export const { setActiveStep } = StepOneSlice.actions;
+export const { setStepOne } = StepOneSlice.actions;
 export default StepOneSlice.reducer;
