@@ -20,8 +20,11 @@ export const FormContainer = styled.div`
 	@media (max-width: 40rem) {
 		transition: all 0.2s ease-in-out;
 		height: fit-content;
+		min-height: 350px;
 		padding: 1.25rem 0;
+		justify-content: space-evenly;
 		& > form {
+			min-height: 300px;
 			transition: all 0.2s ease-in-out;
 			height: fit-content;
 			min-height: 100%;
