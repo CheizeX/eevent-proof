@@ -34,7 +34,7 @@ export default function Home() {
 		phone: Yup.string()
 			.required('Phone number is required')
 			.min(10, 'Too short')
-			.matches(/^\+\d{1,3}\s\d{1,14}$/, 'Invalid phone number'),
+			.matches(/^\+\d+$/, 'Invalid phone number'),
 	});
 
 	const formik = useFormik({
