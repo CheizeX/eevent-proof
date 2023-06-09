@@ -55,8 +55,8 @@ export const StyledFormStepContainer = styled.aside<{ percent: string }>`
 		}
 	}
 	& > :nth-child(2) {
-		@media (max-width: 40rem) {
-			transform: translateX(-1.75rem) rotate(90deg);
+		@media (max-width: 640px) {
+			transform: translateX(-2rem) rotate(90deg);
 		}
 	}
 	& > :nth-child(3) {
